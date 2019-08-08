@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/7 | 一只蚊子乌蝇哥</title>
+  <title>Log4J参数配置详解 | 一只蚊子乌蝇哥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="野鸡大学在读研究生">
+  <meta name="description" content="Log4J xml参数配置">
 <meta name="keywords" content="乌蝇哥">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一只蚊子乌蝇哥">
-<meta property="og:url" content="http://yoursite.com/archives/2019/07/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log4J参数配置详解">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/Log4j配置详解/index.html">
 <meta property="og:site_name" content="一只蚊子乌蝇哥">
-<meta property="og:description" content="野鸡大学在读研究生">
+<meta property="og:description" content="Log4J xml参数配置">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-08T07:45:57.165Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一只蚊子乌蝇哥">
-<meta name="twitter:description" content="野鸡大学在读研究生">
+<meta name="twitter:title" content="Log4J参数配置详解">
+<meta name="twitter:description" content="Log4J xml参数配置">
   
     <link rel="alternative" href="/atom.xml" title="一只蚊子乌蝇哥" type="application/atom+xml">
   
@@ -158,103 +159,169 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Log4j配置详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Log4J参数配置详解
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/Log4j配置详解/" class="archive-article-date">
+  	<time datetime="2019-08-08T07:31:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Log4J xml参数配置</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE log4j:configuration SYSTEM &quot;E:\IdeaProject\ModelProject\lib\apache-log4j-1.2.17\site\apidocs\org\apache\log4j\xml\doc-files\log4j.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;log4j:configuration debug=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 日志输出到控制台 --&gt;</span><br><span class="line">    &lt;appender name=&quot;console&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 日志输出格式 --&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;yyyy-MM-dd HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--过滤器设置输出的级别--&gt;</span><br><span class="line">        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;</span><br><span class="line">            &lt;!-- 设置日志输出的最小级别 --&gt;</span><br><span class="line">            &lt;param name=&quot;levelMin&quot; value=&quot;DEBUG&quot;/&gt;</span><br><span class="line">            &lt;!-- 设置日志输出的最大级别 --&gt;</span><br><span class="line">            &lt;param name=&quot;levelMax&quot; value=&quot;FATAL&quot;/&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!-- 输出日志到文件 --&gt;</span><br><span class="line">    &lt;appender name=&quot;DEBUG&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 输出文件全路径名--&gt;</span><br><span class="line">        &lt;param name=&quot;File&quot; value=&quot;./log/debug/debug.log&quot;/&gt;</span><br><span class="line">        &lt;!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件--&gt;</span><br><span class="line">        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;param name=&quot;Threshold&quot; value=&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;!--是否启用缓存，默认false--&gt;</span><br><span class="line">        &lt;param name=&quot;BufferedIO&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;!--缓存大小，依赖上一个参数(bufferedIO), 默认缓存大小8K  --&gt;</span><br><span class="line">        &lt;param name=&quot;BufferSize&quot; value=&quot;512&quot;/&gt;</span><br><span class="line">        &lt;!-- 日志输出格式 --&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;yyyy-MM-dd HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line">        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMin&quot; value=&quot;DEBUG&quot;/&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMax&quot; value=&quot;DEBUG&quot;/&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;INFO&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 输出文件全路径名--&gt;</span><br><span class="line">        &lt;param name=&quot;File&quot; value=&quot;./log/info/info.log&quot;/&gt;</span><br><span class="line">        &lt;!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件--&gt;</span><br><span class="line">        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;param name=&quot;Threshold&quot; value=&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;!--是否启用缓存，默认false--&gt;</span><br><span class="line">        &lt;param name=&quot;BufferedIO&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;!--缓存大小，依赖上一个参数(bufferedIO), 默认缓存大小8K  --&gt;</span><br><span class="line">        &lt;param name=&quot;BufferSize&quot; value=&quot;512&quot;/&gt;</span><br><span class="line">        &lt;!-- 日志输出格式 --&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;yyyy-MM-dd HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;WARN&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 输出文件全路径名--&gt;</span><br><span class="line">        &lt;param name=&quot;File&quot; value=&quot;./log/warn/warn.log&quot;/&gt;</span><br><span class="line">        &lt;!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件--&gt;</span><br><span class="line">        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;param name=&quot;Threshold&quot; value=&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;!--是否启用缓存，默认false--&gt;</span><br><span class="line">        &lt;param name=&quot;BufferedIO&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;!--缓存大小，依赖上一个参数(bufferedIO), 默认缓存大小8K  --&gt;</span><br><span class="line">        &lt;param name=&quot;BufferSize&quot; value=&quot;512&quot;/&gt;</span><br><span class="line">        &lt;!-- 日志输出格式 --&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;yyyy-MM-dd HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line">        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMin&quot; value=&quot;WARN&quot;/&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMax&quot; value=&quot;WARN&quot;/&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;ERROR&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 输出文件全路径名--&gt;</span><br><span class="line">        &lt;param name=&quot;File&quot; value=&quot;./log/error/error.log&quot;/&gt;</span><br><span class="line">        &lt;!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件--&gt;</span><br><span class="line">        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;param name=&quot;Threshold&quot; value=&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;!--是否启用缓存，默认false--&gt;</span><br><span class="line">        &lt;param name=&quot;BufferedIO&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;!--缓存大小，依赖上一个参数(bufferedIO), 默认缓存大小8K  --&gt;</span><br><span class="line">        &lt;param name=&quot;BufferSize&quot; value=&quot;512&quot;/&gt;</span><br><span class="line">        &lt;!-- 日志输出格式 --&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;yyyy-MM-dd HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line">        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMin&quot; value=&quot;ERROR&quot;/&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMax&quot; value=&quot;ERROR&quot;/&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;FATAL&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 输出文件全路径名--&gt;</span><br><span class="line">        &lt;param name=&quot;File&quot; value=&quot;./log/fatal/fatal.log&quot;/&gt;</span><br><span class="line">        &lt;!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件--&gt;</span><br><span class="line">        &lt;param name=&quot;Append&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;param name=&quot;Threshold&quot; value=&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;!--是否启用缓存，默认false--&gt;</span><br><span class="line">        &lt;param name=&quot;BufferedIO&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;!--缓存大小，依赖上一个参数(bufferedIO), 默认缓存大小8K  --&gt;</span><br><span class="line">        &lt;param name=&quot;BufferSize&quot; value=&quot;512&quot;/&gt;</span><br><span class="line">        &lt;!-- 日志输出格式 --&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;yyyy-MM-dd HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line">        &lt;filter class=&quot;org.apache.log4j.varia.LevelRangeFilter&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMin&quot; value=&quot;FATAL&quot;/&gt;</span><br><span class="line">            &lt;param name=&quot;LevelMax&quot; value=&quot;FATAL&quot;/&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!-- 日志输出到文件，可以配置多久产生一个新的日志信息文件 --&gt;</span><br><span class="line">    &lt;appender name=&quot;dailyRollingAppender&quot; class=&quot;org.apache.log4j.DailyRollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;!-- 文件文件全路径名 --&gt;</span><br><span class="line">        &lt;param name=&quot;File&quot; value=&quot;./log/dailyRollingAppender.log&quot;/&gt;</span><br><span class="line">        &lt;param name=&quot;Append&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;!-- 设置日志备份频率，默认：为每天一个日志文件 --&gt;</span><br><span class="line">        &lt;param name=&quot;DatePattern&quot; value=&quot;&apos;.&apos;yyyy-MM-dd&apos;.log&apos;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--每分钟一个备份--&gt;</span><br><span class="line">        &lt;!--&lt;param name=&quot;DatePattern&quot; value=&quot;&apos;.&apos;yyyy-MM-dd-HH-mm&apos;.log&apos;&quot; /&gt;--&gt;</span><br><span class="line">        &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;param name=&quot;ConversionPattern&quot; value=&quot;[%p][%d&#123;HH:mm:ss SSS&#125;][%c]-[%m]%n&quot;/&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!--</span><br><span class="line">        1. 指定logger的设置，additivity是否遵循缺省的继承机制</span><br><span class="line">        2. 当additivity=&quot;false&quot;时，root中的配置就失灵了，不遵循缺省的继承机制</span><br><span class="line">        3. 代码中使用Logger.getLogger(&quot;logTest&quot;)获得此输出器，且不会使用根输出器</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;logger name=&quot;logTest&quot; additivity=&quot;false&quot;&gt;</span><br><span class="line">        &lt;level value =&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;dailyRollingAppender&quot;/&gt;</span><br><span class="line">    &lt;/logger&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!-- 根logger的设置，若代码中未找到指定的logger，则会根据继承机制，使用根logger--&gt;</span><br><span class="line">    &lt;root&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;console&quot;/&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;DEBUG&quot;/&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;INFO&quot;/&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;WARN&quot;/&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;ERROR&quot;/&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;FATAL&quot;/&gt;</span><br><span class="line">    &lt;/root&gt;</span><br><span class="line">&lt;/log4j:configuration&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asserts/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asserts/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/17/孔乙己/" class="archive-article-date">
-  	<time datetime="2019-07-17T07:11:15.103Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/17/孔乙己/">孔乙己</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/08/Log4j配置详解/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/17/我的第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-07-17T01:50:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/17/孔乙己/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">孔乙己</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/17/我的第一篇博客/">我的第一篇博客</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/17/hello-world/" class="archive-article-date">
-  	<time datetime="2019-07-17T01:47:17.506Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/17/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -277,8 +344,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
