@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/8 | 一只蚊子乌蝇哥</title>
+  <title>SpringBoot自动配置 | 一只蚊子乌蝇哥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="野鸡大学在读研究生">
+  <meta name="description" content="3)、每一个自动配置类进行自动配置功能 4）、以HttpEncodingAutoConfiguration（Http编码自动配置）为例解释自动配置原理">
 <meta name="keywords" content="乌蝇哥">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一只蚊子乌蝇哥">
-<meta property="og:url" content="http://yoursite.com/archives/2019/08/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot自动配置">
+<meta property="og:url" content="http://yoursite.com/2019/08/21/SpringBoot自动配置/index.html">
 <meta property="og:site_name" content="一只蚊子乌蝇哥">
-<meta property="og:description" content="野鸡大学在读研究生">
+<meta property="og:description" content="3)、每一个自动配置类进行自动配置功能 4）、以HttpEncodingAutoConfiguration（Http编码自动配置）为例解释自动配置原理">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-21T14:55:07.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一只蚊子乌蝇哥">
-<meta name="twitter:description" content="野鸡大学在读研究生">
+<meta name="twitter:title" content="SpringBoot自动配置">
+<meta name="twitter:description" content="3)、每一个自动配置类进行自动配置功能 4）、以HttpEncodingAutoConfiguration（Http编码自动配置）为例解释自动配置原理">
   
     <link rel="alternative" href="/atom.xml" title="一只蚊子乌蝇哥" type="application/atom+xml">
   
@@ -158,124 +159,217 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-SpringBoot自动配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      SpringBoot自动配置
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/21/SpringBoot自动配置/" class="archive-article-date">
+
+        
+        <a href="/2019/08/21/SpringBoot自动配置/" class="archive-article-date">
   	<time datetime="2019-08-21T14:51:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/SpringBoot自动配置/">SpringBoot自动配置</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>3)、每一个自动配置类进行自动配置功能</p>
+<p>4）、以<strong>HttpEncodingAutoConfiguration（Http编码自动配置）</strong>为例解释自动配置原理</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
-          
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Configuration //表示为配置类，可以给容器中添加组件</span><br><span class="line">@EnableConfigurationProperties(&#123;HttpProperties.class&#125;) //启动指定类的ConfigurationProperties功能；</span><br><span class="line">@ConditionalOnWebApplication(  //Spring底层@Conditional注解，根据不同的条件，如果满足指定的条件，整个配置类里面的配置就会生效；   判断当前应用是否是web应用，如果时，当前配置类生效。</span><br><span class="line">    type = Type.SERVLET</span><br><span class="line">)</span><br><span class="line">@ConditionalOnClass(&#123;CharacterEncodingFilter.class&#125;) //判断当前项目有没有这个类CharacterEncodingFilter；SpringMVC中进行乱码解决的过滤器</span><br><span class="line">@ConditionalOnProperty(     </span><br><span class="line">    prefix = &quot;spring.http.encoding&quot;,</span><br><span class="line">    value = &#123;&quot;enabled&quot;&#125;,</span><br><span class="line">    matchIfMissing = true</span><br><span class="line">)//判断配置文件中是否存在某个配置  spring.http.encoding ；如果不存在，判断也是成立的</span><br><span class="line">//即使我们配置文件中不配置spring.http.encoding=true，也是默认生效的。</span><br><span class="line">public class HttpEncodingAutoConfiguration &#123;</span><br><span class="line">    </span><br><span class="line">	@Bean //给容器添加一个组件</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public CharacterEncodingFilter characterEncodingFilter()</span><br><span class="line">    &#123;</span><br><span class="line">        CharacterEncodingFilter filter = new OrderedCharacterEncodingFilter();</span><br><span class="line">        filter.setEncoding(this.properties.getCharset().name());  </span><br><span class="line">    filter.setForceRequestEncoding(this.properties.shouldForce(org.springframework.boot.autoconfigure.http.HttpProperties.Encoding.Type.REQUEST));</span><br><span class="line">    filter.setForceResponseEncoding(this.properties.shouldForce(org.springframework.boot.autoconfigure.http.HttpProperties.Encoding.Type.RESPONSE));</span><br><span class="line">        return filter;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
+<p>根据当前不同的条件判断，决定这个配置类是否生效；</p>
+<p>5）、所有再配置文件中能配置的属性都是再xxxProperties类中封装者；配置文件能配置什么就可以参照某个功能对应的这个属性类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(     <span class="comment">//从配置文件中获取指定的值和bean的属性进行绑定</span></span><br><span class="line">    prefix = <span class="string">"spring.http"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpProperties</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
+<p><strong>精髓：</strong></p>
+<p><strong>1）、Spring Boot启动回加载大量的自动配置类</strong></p>
+<p><strong>2）、我们看我们需要的功能有没有Spring Boot默认写好的自动【欸之类；</strong></p>
+<p><strong>3）、我们再来看这个自动配置类中到底配置了哪些组件；（只要我们要用的组件有，我们就不需要再来配置了）</strong></p>
+<p><strong>4）、给容器中自动配置类添加组件的时候，会从properties类中获取某些属性，我们就可以在配置文件中指定这些属性的值；</strong></p>
+<p><strong>自动配置类在一定条件下才能生效；</strong></p>
+<p>我们怎么知道哪些自动配置类生效？</p>
+<p>我们可以通过启用debug=true属性，让控制台打印自动配置报告，这样我们可以方便的知道哪些自动配置类生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#开启SpringBoot 的 debug属性</span><br><span class="line">debug=true</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">============================</span><br><span class="line">CONDITIONS EVALUATION REPORT</span><br><span class="line">============================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Positive matches: (已经启用)</span><br><span class="line">-----------------</span><br><span class="line"></span><br><span class="line">   CodecsAutoConfiguration matched:</span><br><span class="line">      - <span class="meta">@ConditionalOnClass</span> found required <span class="class"><span class="keyword">class</span> '<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">http</span>.<span class="title">codec</span>.<span class="title">CodecConfigurer</span>' (<span class="title">OnClassCondition</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line">   CodecsAutoConfiguration.JacksonCodecConfiguration matched:</span><br><span class="line">      - <span class="meta">@ConditionalOnClass</span> found required <span class="class"><span class="keyword">class</span> '<span class="title">com</span>.<span class="title">fasterxml</span>.<span class="title">jackson</span>.<span class="title">databind</span>.<span class="title">ObjectMapper</span>' (<span class="title">OnClassCondition</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">          </span></span><br><span class="line">Negative matches:（未启用）</span><br><span class="line">-----------------</span><br><span class="line"></span><br><span class="line">   ActiveMQAutoConfiguration:</span><br><span class="line">      Did not match:</span><br><span class="line">         - <span class="meta">@ConditionalOnClass</span> did not find required <span class="class"><span class="keyword">class</span> '<span class="title">javax</span>.<span class="title">jms</span>.<span class="title">ConnectionFactory</span>' (<span class="title">OnClassCondition</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line">   AopAutoConfiguration:</span><br><span class="line">      Did not match:</span><br><span class="line">         - <span class="meta">@ConditionalOnClass</span> did not find required <span class="class"><span class="keyword">class</span> '<span class="title">org</span>.<span class="title">aspectj</span>.<span class="title">lang</span>.<span class="title">annotation</span>.<span class="title">Aspect</span>' (<span class="title">OnClassCondition</span>)</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asserts/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asserts/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/21/SpringBoot自动配置/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/21/SpringBoot日志/" class="archive-article-date">
-  	<time datetime="2019-08-21T14:50:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/21/SpringBoot日志/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot日志</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/SpringBoot日志/">SpringBoot日志</a>
-    </h1>
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NTkxMi8yMjQyMw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
   
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/08/新模板测试/" class="archive-article-date">
-  	<time datetime="2019-08-08T12:59:19.518Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/08/Log4j配置详解/" class="archive-article-date">
-  	<time datetime="2019-08-08T07:31:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/08/Log4j配置详解/">Log4J参数配置详解</a>
-    </h1>
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
+
+
 
 
           </div>
@@ -298,8 +392,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
